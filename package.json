@@ -2,6 +2,7 @@
     "scripts": {
         "migrate": "cd backend && go build",
         "dev-back": "cd backend && go build && go run .",
-        "dev-front": "cd frontend && npm run dev"
+        "dev-front": "cd frontend && npm run dev",
+        "tailwind": "cd frontend && npx tailwindcss -i ./src/assets/style/main.css -o ./dist/main.css --watch"
     }
 }
