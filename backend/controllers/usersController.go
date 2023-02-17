@@ -10,8 +10,10 @@ import (
 )
 
 type Body struct {
-	Email    string `form:"email" json:"email"`
-	Password string `form:"password" json:"password"`
+	Email     string `form:"email" json:"email"`
+	Password  string `form:"password" json:"password"`
+	Firstname string `form:"password" json:"firstname"`
+	Lastname  string `form:"password" json:"lastname"`
 }
 
 func Signup(ctx *gin.Context) {
@@ -34,9 +36,12 @@ func Signup(ctx *gin.Context) {
 	}
 
 	user := models.User{
-		Email:    body.Email,
-		Password: string(hash),
+		Email:     body.Email,
+		Password:  string(hash),
+		Lastname:  body.Lastname,
+		Firstname: body.Firstname,
 	}
+
 	result := config.DB.Create(&user)
 
 	if result.Error != nil {
