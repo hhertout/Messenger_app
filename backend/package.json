@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "go build",
+    "start": "go run .",
+    "dev": "go build && go run ."
+  }
+}
