@@ -16,7 +16,7 @@ func UsersFixtures() {
 	}
 
 	for i := 0; i < 10; i++ {
-		userMail := fmt.Sprint("user.", i, "@gmail.com")
+		userMail := fmt.Sprint("user.", i+1, "@gmail.com")
 		user := models.User{
 			Email:     userMail,
 			Password:  string(hash),
