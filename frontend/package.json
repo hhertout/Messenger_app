@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-      "tailwind": "npx tailwindcss -i ./src/assets/style/main.css -o ./dist/main.css --watch"
+    "tailwind": "npx tailwindcss -i ./src/assets/style/main.css -o ./dist/main.css --watch"
   },
   "dependencies": {
     "localforage": "^1.10.0",
