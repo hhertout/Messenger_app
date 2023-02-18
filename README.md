@@ -8,5 +8,5 @@
 Project made to practice GO API & React
 
 #### Stack
-- GO w/ gin
+- GO API w/ gin
 - React
