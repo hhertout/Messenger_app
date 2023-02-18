@@ -10,3 +10,13 @@ Project made to practice GO API & React
 #### Stack
 - GO API w/ gin
 - React
+
+## Features
+*coming soon*
+
+## Setup
+
+1️⃣ - Create the database<br>
+2️⃣ - Create your .env file from .env.sample located in /backend<br>
+3️⃣ - Run <code>npm run dev-back</code> <code>npm run dev-front</code><br>
+4️⃣ - Go on your localhost:5173<br>
