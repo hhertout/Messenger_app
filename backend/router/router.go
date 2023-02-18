@@ -16,9 +16,16 @@ func Routes() {
 	router.Use(cors.New(config))
 	//router.Use(cors.Default())
 
+	// Auth
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
 	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
+
+	// User
+	router.GET("/user/:id", middleware.RequireAuth, controllers.GetUser)
+
+	// Contacts
+	router.GET("/contacts", middleware.RequireAuth, controllers.GetContacts)
 
 	router.Run()
 }

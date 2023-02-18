@@ -59,9 +59,9 @@ func Login(c *gin.Context) {
 			"error":   os.Getenv("SECRET"),
 			"message": "Failed to create token",
 		})
-
 		return
 	}
+
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 	c.JSON(http.StatusOK, gin.H{
