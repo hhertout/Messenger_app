@@ -56,3 +56,29 @@ func Signup(ctx *gin.Context) {
 		"success": "User created",
 	})
 }
+
+func GetUser(c *gin.Context) {
+	id := c.Param("id")
+
+	type User struct {
+		ID        int
+		Firstname string
+		Lastname  string
+		Email     string
+	}
+
+	var user User
+
+	result := config.DB.First(&user, id)
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "Bad request",
+			"message": result.Error,
+		})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+		"user":   user,
+	})
+}

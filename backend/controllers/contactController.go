@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"API_go/go_test/config"
-	"API_go/go_test/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -32,15 +31,5 @@ func GetContacts(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"contacts_nb": result.RowsAffected,
 		"contacts":    allContacts,
-	})
-}
-
-func ShowContact(c *gin.Context) {
-	id := c.Param("id")
-	var contact models.Contact
-	config.DB.First(&contact, id)
-
-	c.JSON(http.StatusOK, gin.H{
-		"contact": contact,
 	})
 }
