@@ -7,4 +7,5 @@ import (
 
 func Migrate() {
 	config.DB.AutoMigrate(&models.User{})
+	config.DB.AutoMigrate(&models.Contact{})
 }
