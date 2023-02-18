@@ -13,28 +13,26 @@ func GetContacts(c *gin.Context) {
 	u, _ := c.Get("userid")
 
 	// Get all contacts of the user
-	var allContacts []models.Contact
+	type Contact struct {
+		Firstname string
+		Lastname  string
+	}
+	var allContacts []Contact
 
-	result := config.DB.Where("user_id = ?", u).Find(&allContacts)
+	result := config.DB.Raw("SELECT firstname, lastname FROM contacts c JOIN users u ON c.user_contact_id = u.id WHERE c.user_owner_id = ?", u).Scan(&allContacts)
 	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"message": result.Error,
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "Bad request",
+			"error":  result.Error,
 		})
 		return
 	}
 
-	type Contact struct {
-		ID        uint
-		Email     string
-		Firstname string
-		Lastname  string
-	}
-
 	// Expose the result => contacts
-	/* 	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"contacts_nb": result.RowsAffected,
-		"contacts":    contacts,
-	}) */
+		"contacts":    allContacts,
+	})
 }
 
 func ShowContact(c *gin.Context) {
