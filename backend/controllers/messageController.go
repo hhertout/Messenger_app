@@ -52,8 +52,7 @@ func SendMessage(c *gin.Context) {
 	result := config.DB.Save(&m)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"status": "bad request",
-			"error":  result.Error,
+			"status": "saving messsage failed",
 		})
 		return
 	}
@@ -82,7 +81,6 @@ func GetMessages(c *gin.Context) {
 	result := config.DB.Select("ID").First(&r, id)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":   result.Error,
 			"message": "bad request",
 		})
 		return
@@ -109,7 +107,6 @@ func GetMessages(c *gin.Context) {
 	`, u, u, u, r.ID, r.ID, u).Scan(&m)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":   result.Error,
 			"message": "bad request",
 		})
 		return
@@ -130,7 +127,6 @@ func DeleteMessage(c *gin.Context) {
 	result := config.DB.Unscoped().Delete(&models.Message{}, id)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"error":   result.Error,
 			"message": "bad request",
 		})
 	}

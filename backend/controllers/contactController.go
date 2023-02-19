@@ -27,7 +27,6 @@ func GetContacts(c *gin.Context) {
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "Bad request",
-			"error":  result.Error,
 		})
 		return
 	}

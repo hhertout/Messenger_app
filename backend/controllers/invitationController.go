@@ -15,8 +15,7 @@ func Invite(c *gin.Context) {
 	u, err := getUserConnected(c)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"message": "user log error",
-			"error":   err,
+			"message": "user login error",
 		})
 		return
 	}
@@ -84,7 +83,6 @@ func UpdateInvitation(c *gin.Context) {
 		if result.Error != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "update failed",
-				"error":   result.Error,
 			})
 			return
 		}
@@ -93,7 +91,6 @@ func UpdateInvitation(c *gin.Context) {
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "contact add failed",
-				"error":   err,
 			})
 			return
 		}
@@ -121,7 +118,6 @@ func DeleteInvitation(c *gin.Context) {
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "invitation's delete failed",
-			"error":   result.Error,
 		})
 		return
 	}
@@ -162,7 +158,6 @@ func GetInvitation(c *gin.Context) {
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "cannot retrieve data",
-			"error":   result.Error,
 		})
 		return
 	}
@@ -179,8 +174,7 @@ func GetAcceptedInvitation(c *gin.Context) {
 	u, err := getUserConnected(c)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"message": "user log error",
-			"error":   err,
+			"message": "user login error",
 		})
 		return
 	}
@@ -205,7 +199,6 @@ func GetAcceptedInvitation(c *gin.Context) {
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "cannot retrieve data",
-			"error":   result.Error,
 		})
 		return
 	}

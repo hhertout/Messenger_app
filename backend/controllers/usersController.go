@@ -72,8 +72,7 @@ func GetUser(c *gin.Context) {
 	result := config.DB.First(&user, id)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"status":  "Bad request",
-			"message": result.Error,
+			"status": "Bad request",
 		})
 	}
 
