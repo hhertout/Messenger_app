@@ -58,7 +58,7 @@ func SendMessage(c *gin.Context) {
 		return
 	}
 	//Succes message
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"status":  "ok",
 		"message": m,
 	})

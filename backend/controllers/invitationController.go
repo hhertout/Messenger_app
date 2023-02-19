@@ -43,7 +43,7 @@ func Invite(c *gin.Context) {
 
 	config.DB.Save(&invitation)
 
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"status":  "ok",
 		"message": "invitation sent",
 	})
@@ -98,7 +98,7 @@ func UpdateInvitation(c *gin.Context) {
 			return
 		}
 		// Reponse => all's ok
-		c.JSON(http.StatusOK, gin.H{
+		c.JSON(http.StatusCreated, gin.H{
 			"status":            "ok",
 			"message":           "update done, contact successfully created",
 			"contact":           contact,
@@ -126,7 +126,7 @@ func DeleteInvitation(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"status":  "ok",
 		"message": "invitation successfully deleted",
 	})
@@ -137,7 +137,7 @@ func GetInvitation(c *gin.Context) {
 	// Recuperer l'ID du user connecté
 	u, err := getUserConnected(c)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{
+		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "user log error",
 		})
 	}
@@ -168,7 +168,7 @@ func GetInvitation(c *gin.Context) {
 	}
 
 	// Envoyer les invitations
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"invitationsNumber": result.RowsAffected,
 		"invitations":       invitations,
 	})
