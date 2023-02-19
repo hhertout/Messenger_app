@@ -69,7 +69,14 @@ func GetInvitation(c *gin.Context) {
 
 	var invitations []Users
 
-	result := config.DB.Raw("SELECT firstname, lastname, status FROM invitations i INNER JOIN users u on i.user_sendeur = u.id WHERE i.status = ? AND i.user_sendeur = ?", statusPending, userId).Scan(&invitations)
+	result := config.DB.Raw(`
+	SELECT firstname, lastname, status 
+	FROM invitations i 
+	INNER JOIN users u on i.user_sendeur = u.id 
+	WHERE i.status = ? 
+	AND i.user_sendeur = ? 
+	ORDER BY i.created_at
+	`, statusPending, userId).Scan(&invitations)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "cannot retrieve data",
@@ -102,7 +109,14 @@ func GetAcceptedInvitation(c *gin.Context) {
 
 	var invitations []Users
 
-	result := config.DB.Raw("SELECT firstname, lastname, status FROM invitations i INNER JOIN users u on i.user_sendeur = u.id WHERE i.status = ? AND i.user_sendeur = ?", statusAccepted, userId).Scan(&invitations)
+	result := config.DB.Raw(`
+	SELECT firstname, lastname, status 
+	FROM invitations i 
+	INNER JOIN users u on i.user_sendeur = u.id 
+	WHERE i.status = ? 
+	AND i.user_sendeur = ? 
+	ORDER BY i.updated_at
+	`, statusAccepted, userId).Scan(&invitations)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "cannot retrieve data",
