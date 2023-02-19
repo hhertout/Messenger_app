@@ -36,6 +36,7 @@ func Routes() {
 
 	// Message
 	router.POST("/message", middleware.RequireAuth, controllers.SendMessage)
+	router.GET("/message/:id", middleware.RequireAuth, controllers.GetMessages)
 
 	router.Run()
 }
