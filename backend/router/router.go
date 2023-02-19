@@ -29,6 +29,7 @@ func Routes() {
 
 	// Invitations
 	router.POST("/invite", middleware.RequireAuth, controllers.Invite)
+	router.DELETE("/invite/:id", middleware.RequireAuth, controllers.DeleteInvitation)
 	router.GET("/invite/pending", middleware.RequireAuth, controllers.GetInvitation)
 	router.GET("/invite/accepted", middleware.RequireAuth, controllers.GetInvitation)
 

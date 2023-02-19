@@ -49,6 +49,21 @@ func Invite(c *gin.Context) {
 // Modification du status de l'invitation
 
 // Suppresssion de l'invitation
+func DeleteInvitation(c *gin.Context) {
+	id := c.Param("id")
+
+	result := config.DB.Unscoped().Delete(&models.Invitation{}, id)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "invitation's delete failed",
+		})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "ok",
+		"message": "invitation successfully deleted",
+	})
+}
 
 // Toutes les invitations
 func GetInvitation(c *gin.Context) {
