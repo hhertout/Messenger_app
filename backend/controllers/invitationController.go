@@ -69,7 +69,7 @@ func GetInvitation(c *gin.Context) {
 
 	var invitations []Users
 
-	result := config.DB.Raw("SELECT firstname, lastname FROM invitations i INNER JOIN users u on i.user_sendeur = u.id WHERE i.status = 'pending' AND i.user_sendeur = ?", userId).Scan(&invitations)
+	result := config.DB.Raw("SELECT firstname, lastname, status FROM invitations i INNER JOIN users u on i.user_sendeur = u.id WHERE i.status = ? AND i.user_sendeur = ?", statusPending, userId).Scan(&invitations)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "cannot retrieve data",
@@ -77,7 +77,40 @@ func GetInvitation(c *gin.Context) {
 		})
 	}
 
-	// Envoyé les invitations
+	// Envoyer les invitations
+	c.JSON(http.StatusOK, gin.H{
+		"invitationsNumber": result.RowsAffected,
+		"invitations":       invitations,
+	})
+}
+
+func GetAcceptedInvitation(c *gin.Context) {
+	// Recuperer l'ID du user connecté
+	userId, err := getUserConnected(c)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "user log error",
+		})
+	}
+
+	// Recuperer les invitations du user connecté
+	type Users struct {
+		Firstname string
+		Lastname  string
+		Status    string
+	}
+
+	var invitations []Users
+
+	result := config.DB.Raw("SELECT firstname, lastname, status FROM invitations i INNER JOIN users u on i.user_sendeur = u.id WHERE i.status = ? AND i.user_sendeur = ?", statusAccepted, userId).Scan(&invitations)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "cannot retrieve data",
+			"error":   result.Error,
+		})
+	}
+
+	// Envoyer les invitations
 	c.JSON(http.StatusOK, gin.H{
 		"invitationsNumber": result.RowsAffected,
 		"invitations":       invitations,
