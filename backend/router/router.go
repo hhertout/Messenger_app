@@ -37,6 +37,7 @@ func Routes() {
 	// Message
 	router.POST("/message", middleware.RequireAuth, controllers.SendMessage)
 	router.GET("/message/:id", middleware.RequireAuth, controllers.GetMessages)
+	router.DELETE("/message/:id", middleware.RequireAuth, controllers.DeleteMessage)
 
 	router.Run()
 }
