@@ -16,29 +16,42 @@ func SendMessage(c *gin.Context) {
 			"message": "undefined user",
 			"err":     err,
 		})
+		return
 	}
 
-	// Recuperer le user destinataire
-	recipientId := c.Param("id")
-	type User struct {
-		ID uint
-	}
-	var r User
-	config.DB.First(&r, recipientId)
-
-	// Recuperer le contenu du message
+	// Recuperer le contenu du message & le destinataire
 	type Body struct {
-		Message string
+		Recipient uint
+		Message   string
 	}
 	var mBody Body
-	c.Bind(&mBody)
+
+	err = c.Bind(&mBody)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "bad request",
+			"error":  err,
+		})
+		return
+	}
 
 	//Enregistrer le message
 	m := models.Message{
-		Message:       mBody.Message,
 		UserSender:    u,
-		UserRecipient: r.ID,
+		UserRecipient: mBody.Recipient,
+		Message:       mBody.Message,
 	}
-	config.DB.Save(&m)
+	result := config.DB.Save(&m)
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "bad request",
+			"error":  result.Error,
+		})
+		return
+	}
 	//Retour
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "ok",
+		"message": m,
+	})
 }
