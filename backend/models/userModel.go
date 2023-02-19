@@ -8,6 +8,8 @@ type User struct {
 	Password  string
 	Firstname string
 	Lastname  string
-	Owner     Contact `gorm:"foreignKey:UserOwnerID"`
-	Contact   Contact `gorm:"foreignKey:UserContactID"`
+	Owner     Contact    `gorm:"foreignKey:UserOwnerID"`
+	Contact   Contact    `gorm:"foreignKey:UserContactID"`
+	Sender    Invitation `gorm:"foreignKey:UserSendeur"`
+	Recipient Invitation `gorm:"foreignKey:UserRecipient"`
 }

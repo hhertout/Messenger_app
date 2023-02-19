@@ -12,12 +12,12 @@ var userNb = 10
 
 func UsersFixtures() {
 	password := "password"
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
-	if err != nil {
-		fmt.Printf("Error during hash => %v", err)
-	}
 
 	for i := 0; i < userNb; i++ {
+		hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
+		if err != nil {
+			fmt.Printf("Error during hash => %v", err)
+		}
 		userMail := fmt.Sprint("user.", i+1, "@gmail.com")
 		user := models.User{
 			Email:     userMail,

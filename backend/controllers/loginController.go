@@ -67,6 +67,23 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "ok",
 		"message": "successfully logged",
-		"user":    user,
 	})
+}
+
+// Recuperer l'ID du user connecté
+func getUserConnected(c *gin.Context) (uint, error) {
+	u, exist := c.Get("userid")
+	if !exist {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "bad request",
+			"message": "user does not exist",
+		})
+	}
+
+	var user models.User
+	result := config.DB.Select("ID").First(&user, u)
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return uint(user.ID), nil
 }

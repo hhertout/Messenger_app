@@ -27,5 +27,12 @@ func Routes() {
 	// Contacts
 	router.GET("/contacts", middleware.RequireAuth, controllers.GetContacts)
 
+	// Invitations
+	router.GET("/invite/pending", middleware.RequireAuth, controllers.GetInvitation)
+	router.GET("/invite/accepted", middleware.RequireAuth, controllers.GetInvitation)
+	router.POST("/invite", middleware.RequireAuth, controllers.Invite)
+	router.DELETE("/invite/:id", middleware.RequireAuth, controllers.DeleteInvitation)
+	router.PUT("/invite/:id", middleware.RequireAuth, controllers.UpdateInvitation)
+
 	router.Run()
 }
