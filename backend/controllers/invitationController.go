@@ -16,7 +16,9 @@ func Invite(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": "user log error",
+			"error":   err,
 		})
+		return
 	}
 
 	// Recuperer le user a qui l'invitation est envoyée
@@ -29,6 +31,7 @@ func Invite(c *gin.Context) {
 			"status":  "bad request",
 			"message": "invitation failed",
 		})
+		return
 	}
 
 	// Enregistré l'invitation avec le status pending
@@ -42,11 +45,73 @@ func Invite(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "ok",
-		"message": "invitation successfully sent",
+		"message": "invitation sent",
 	})
 }
 
 // Modification du status de l'invitation
+func UpdateInvitation(c *gin.Context) {
+	// Recuperer l'id de l'invitation
+	id := c.Param("id")
+
+	//Recupération de l'invitation par les paramètres
+	var invit models.Invitation
+	result := config.DB.First(&invit, id)
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "invitation does not exist",
+		})
+		return
+	}
+
+	// Recuprer les changements apporté par l'utilisateur
+	type Body struct {
+		Status string
+	}
+	var iBody Body
+	if c.Bind(&iBody) != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "bad request",
+			"message": "update failed",
+		})
+		return
+	}
+	// Mettre a jour le status de l'invitation
+	if iBody.Status == "accepted" {
+		//Update du status de l'invitation
+		invit.Status = statusAccepted
+		result := config.DB.Save(&invit)
+		if result.Error != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"message": "update failed",
+				"error":   result.Error,
+			})
+			return
+		}
+		// Invitation Status Accepted = > Ajout du contact
+		contact, err := addContact(invit.UserSendeur, invit.UserRecipient)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"message": "contact add failed",
+				"error":   err,
+			})
+			return
+		}
+		// Reponse => all's ok
+		c.JSON(http.StatusOK, gin.H{
+			"status":            "ok",
+			"message":           "update done, contact successfully created",
+			"contact":           contact,
+			"invitation-status": iBody.Status,
+		})
+
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "bad request",
+			"message": "update failed",
+		})
+	}
+}
 
 // Suppresssion de l'invitation
 func DeleteInvitation(c *gin.Context) {
@@ -56,7 +121,9 @@ func DeleteInvitation(c *gin.Context) {
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "invitation's delete failed",
+			"error":   result.Error,
 		})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -97,6 +164,7 @@ func GetInvitation(c *gin.Context) {
 			"message": "cannot retrieve data",
 			"error":   result.Error,
 		})
+		return
 	}
 
 	// Envoyer les invitations
@@ -112,7 +180,9 @@ func GetAcceptedInvitation(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": "user log error",
+			"error":   err,
 		})
+		return
 	}
 
 	// Recuperer les invitations du user connecté
@@ -137,6 +207,7 @@ func GetAcceptedInvitation(c *gin.Context) {
 			"message": "cannot retrieve data",
 			"error":   result.Error,
 		})
+		return
 	}
 
 	// Envoyer les invitations
