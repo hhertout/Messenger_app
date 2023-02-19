@@ -16,11 +16,11 @@ type Body struct {
 	Lastname  string `form:"password" json:"lastname"`
 }
 
-func Signup(ctx *gin.Context) {
+func Signup(c *gin.Context) {
 	body := Body{}
 
-	if ctx.Bind(&body) != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
+	if c.Bind(&body) != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Bad request",
 		})
 
@@ -30,7 +30,7 @@ func Signup(ctx *gin.Context) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Hash Failed",
 		})
 	}
@@ -45,14 +45,14 @@ func Signup(ctx *gin.Context) {
 	result := config.DB.Create(&user)
 
 	if result.Error != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "User creation failed",
 		})
 
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"success": "User created",
 	})
 }
