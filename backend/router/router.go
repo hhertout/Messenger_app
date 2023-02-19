@@ -34,5 +34,10 @@ func Routes() {
 	router.DELETE("/invite/:id", middleware.RequireAuth, controllers.DeleteInvitation)
 	router.PUT("/invite/:id", middleware.RequireAuth, controllers.UpdateInvitation)
 
+	// Message
+	router.POST("/message", middleware.RequireAuth, controllers.SendMessage)
+	router.GET("/message/:id", middleware.RequireAuth, controllers.GetMessages)
+	router.DELETE("/message/:id", middleware.RequireAuth, controllers.DeleteMessage)
+
 	router.Run()
 }
