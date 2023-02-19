@@ -12,7 +12,7 @@ var statusAccepted, statusPending = "accepted", "pending"
 
 func Invite(c *gin.Context) {
 	// Recuperer l'ID du user connecté
-	userId, err := getUserConnected(c)
+	u, err := getUserConnected(c)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": "user log error",
@@ -37,7 +37,7 @@ func Invite(c *gin.Context) {
 	// Enregistré l'invitation avec le status pending
 	invitation := models.Invitation{
 		UserRecipient: iBody.ID,
-		UserSendeur:   userId,
+		UserSendeur:   u,
 		Status:        statusPending,
 	}
 
@@ -135,7 +135,7 @@ func DeleteInvitation(c *gin.Context) {
 // Toutes les invitations
 func GetInvitation(c *gin.Context) {
 	// Recuperer l'ID du user connecté
-	userId, err := getUserConnected(c)
+	u, err := getUserConnected(c)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": "user log error",
@@ -158,7 +158,7 @@ func GetInvitation(c *gin.Context) {
 	WHERE i.status = ? 
 	AND i.user_sendeur = ? 
 	ORDER BY i.created_at
-	`, statusPending, userId).Scan(&invitations)
+	`, statusPending, u).Scan(&invitations)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "cannot retrieve data",
@@ -176,7 +176,7 @@ func GetInvitation(c *gin.Context) {
 
 func GetAcceptedInvitation(c *gin.Context) {
 	// Recuperer l'ID du user connecté
-	userId, err := getUserConnected(c)
+	u, err := getUserConnected(c)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": "user log error",
@@ -201,7 +201,7 @@ func GetAcceptedInvitation(c *gin.Context) {
 	WHERE i.status = ? 
 	AND i.user_sendeur = ? 
 	ORDER BY i.updated_at
-	`, statusAccepted, userId).Scan(&invitations)
+	`, statusAccepted, u).Scan(&invitations)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "cannot retrieve data",
