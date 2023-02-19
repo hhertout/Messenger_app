@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var statusAccepted, statusRejected, statusPending = "accepted", "rejected", "pending"
+var statusAccepted, statusPending = "accepted", "pending"
 
 func Invite(c *gin.Context) {
 	// Recuperer l'ID du user connecté
