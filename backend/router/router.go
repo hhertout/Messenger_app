@@ -29,7 +29,8 @@ func Routes() {
 
 	// Invitations
 	router.POST("/invite", middleware.RequireAuth, controllers.Invite)
-	router.GET("/invite", middleware.RequireAuth, controllers.GetInvitation)
+	router.GET("/invite/pending", middleware.RequireAuth, controllers.GetInvitation)
+	router.GET("/invite/accepted", middleware.RequireAuth, controllers.GetInvitation)
 
 	router.Run()
 }
