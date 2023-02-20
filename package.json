@@ -1,5 +1,6 @@
 {
     "scripts": {
+        "setup": "cd frontend && npm install",
         "api-build": "cd backend && go build -o api",
         "dev-back": "cd backend && go build -o api && go run .",
         "dev-front": "cd frontend && npm run dev",
