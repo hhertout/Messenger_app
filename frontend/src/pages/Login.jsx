@@ -1,7 +1,9 @@
 import React from "react"
 import Loginform from "../components/login/loginform"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
+  const navigate = useNavigate()
   const login = (email, password) => {
     const logs = {
       email: email,
@@ -14,12 +16,15 @@ export default function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(logs),
+      credentials: "include",
     }
     fetch(route, headers)
       .then(res => {
-        res.json()
+        console.log(res.status)
+        if (res.status == 200) {
+          navigate("/")
+        }
       })
-      .then(data => console.log(data))
       .catch(err => console.error(err))
   }
 

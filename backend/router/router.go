@@ -1,6 +1,7 @@
 package router
 
 import (
+	"API_go/go_test/config"
 	"API_go/go_test/controllers"
 	"API_go/go_test/middleware"
 
@@ -9,14 +10,7 @@ import (
 
 func Routes() {
 	router := gin.New()
-	router.SetTrustedProxies([]string{"*"})
-	/* config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"*"}
-	config.AllowCredentials = true
-	router.Use(cors.New(config)) */
-	//router.Use(cors.Default())
-	router.Use(middleware.CORSMiddleware())
-
+	config.CORSConfig(router)
 	// Auth
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
