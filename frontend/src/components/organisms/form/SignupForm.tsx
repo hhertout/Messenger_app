@@ -3,13 +3,13 @@ import Button from "../../atoms/Button"
 import { FormRaw } from "../../moleculs/FormRaw"
 
 type Props = {
-  signup: Function
+  signup: (email: string, password: string, firstname:string, lastname:string) => Promise<Response>
 }
 
 export default function SignupForm({ signup }: Props) {
   const [password, setPassword] = useState<string>("")
   const [confirmPassword, setConfirmPassword] = useState<string>("")
-  const [error, SetError] = useState<string>("")
+  const [error, setError] = useState<string | null >(null)
   const emailInput = useRef<HTMLInputElement>(null!)
   const firstnameInput = useRef<HTMLInputElement>(null!)
   const lastnameInput = useRef<HTMLInputElement>(null!)
@@ -28,6 +28,7 @@ export default function SignupForm({ signup }: Props) {
   }
 
   const handleConfirmPwdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError(null)
     setConfirmPassword(e.currentTarget.value)
   }
 
@@ -41,6 +42,7 @@ export default function SignupForm({ signup }: Props) {
         onChange={handlePwdChange}
         value={password}
         isRequired={true}
+        isValid={password === confirmPassword}
       />
       <FormRaw
         type={"password"}
@@ -49,11 +51,12 @@ export default function SignupForm({ signup }: Props) {
         onChange={handleConfirmPwdChange}
         value={confirmPassword}
         isRequired={true}
+        isValid={password === confirmPassword}
       />
-      {password != confirmPassword ? <p className="error">{error}</p> : null}
+      {password != confirmPassword ? <p className="error">⚠️ Passwords must be equals</p> : null}
       <FormRaw type={"firstname"} name={"firstname"} title={"Firstname"} inputRef={firstnameInput} isRequired={true} />
       <FormRaw type={"lastname"} name={"lastname"} title={"Lastname"} inputRef={lastnameInput} isRequired={true} />
-      <Button title={"Create my account"} />
+      <Button title={"Create my account"} color={"primary"}/>
     </form>
   )
 }

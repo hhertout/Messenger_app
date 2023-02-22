@@ -62,9 +62,11 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	user.Password = ""
+
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "/", "localhost", true, true)
-	c.JSON(http.StatusOK, gin.H{})
+	c.JSON(http.StatusOK, gin.H{"user": user})
 }
 
 // Recuperer l'ID du user connecté

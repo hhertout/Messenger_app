@@ -11,4 +11,11 @@
         max-width: 400px;
         padding: 0.3rem;
     }
+    input:invalid{
+        outline: 1px solid r.$error
+    }
+    .invalid {
+        border: 2px solid r.$error
+    }
+
 }
