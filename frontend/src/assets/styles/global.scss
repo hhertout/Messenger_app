@@ -1,0 +1,29 @@
+@use 'root' as r;
+
+*, ::before, ::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: r.$background;
+    color: r.$text-color;
+    font-family: r.$font-body;
+}
+
+.container{
+    max-width: 990px;
+    margin: auto;
+    padding: 2rem;
+}
+.container-xl{
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+}
+.container-sm{
+    max-width: 550px;
+    margin: auto;
+    padding: 2rem;
+}

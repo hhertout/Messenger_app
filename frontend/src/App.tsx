@@ -1,14 +1,13 @@
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/home"
-import Login from "./pages/Login"
+import { Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
 import Signup from "./pages/Signup"
+import "./assets/styles/global.scss"
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>

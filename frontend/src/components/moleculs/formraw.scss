@@ -1,0 +1,14 @@
+@use '../../assets/styles/root.scss' as r;
+
+.form-raw{
+    display: flex;
+    flex-direction: column;
+    margin-block: 0.5rem;
+
+
+    input{
+        margin-block: 0.2rem;
+        max-width: 400px;
+        padding: 0.3rem;
+    }
+}

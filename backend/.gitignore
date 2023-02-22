@@ -1,3 +1,4 @@
 .env
 go_test
 api
+database.sql
