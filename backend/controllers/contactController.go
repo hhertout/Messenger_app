@@ -14,6 +14,7 @@ func GetContacts(c *gin.Context) {
 
 	// Get all contacts of the user
 	type Contact struct {
+		ID        uint
 		Firstname string
 		Lastname  string
 	}

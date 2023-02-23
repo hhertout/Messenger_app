@@ -7,18 +7,12 @@ export default function Home() {
   const { currentUser, setCurrentUser } = useContext(UserContext)
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    logout().then(() => {
-      setCurrentUser(null)
-      navigate("/login")
-    })
-  }
   
   return (
     <div>
       <h1>Hello {currentUser != null ? currentUser.firstname : "world"}</h1>
 
-      <button onClick={handleClick}>Loggout</button>
+      
     </div>
   )
 }

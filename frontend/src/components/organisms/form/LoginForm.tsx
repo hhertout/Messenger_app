@@ -36,7 +36,7 @@ export default function LoginForm({ login }: Props) {
           })
         }
       })
-      navigate("/")
+      navigate("/app")
     }
   }
 

@@ -21,4 +21,11 @@
         @extend %flex-center;
         gap: 0.5rem;
     }
+    .logout-button{
+        padding-inline: 0.5rem;
+        font-size: 1rem;
+        color: r.$text-color;
+        background-color: r.$primary;
+        border: none;
+    }
 }

@@ -8,8 +8,8 @@ type Props = {
 
 export default function ContactCards({firstname, lastname}: Props) {
   return (
-    <>
+    <div className='contact-card'>
       <div>{firstname} {lastname}</div>
-    </>
+    </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { getContacts } from "../../../api/Contact"
 import ContactCards from "../../moleculs/ContactCards"
 import {v4 as uuid} from "uuid"
+import "./contactlist.scss"
 
 type Contact = {
   Firstname: string
@@ -24,7 +25,7 @@ export default function ContactList() {
   //useEffect(() => {}, [contacts])
 
   return (
-    <>
+    <div className="contact-wrapper">
       <div>Nombre de contacts : {contactNb}</div>
       {contacts.length === 0
         ? "No contact found... "
@@ -33,6 +34,6 @@ export default function ContactList() {
                 <ContactCards key={uuid()} firstname={contact.Firstname} lastname={contact.Lastname} />
             )
           })}
-    </>
+    </div>
   )
 }
