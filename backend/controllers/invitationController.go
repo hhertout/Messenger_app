@@ -140,6 +140,7 @@ func GetInvitation(c *gin.Context) {
 
 	// Recuperer les invitations du user connecté
 	type Users struct {
+		ID        uint
 		Firstname string
 		Lastname  string
 		Status    string
@@ -148,11 +149,11 @@ func GetInvitation(c *gin.Context) {
 	var invitations []Users
 
 	result := config.DB.Raw(`
-	SELECT firstname, lastname, status 
+	SELECT i.id, firstname, lastname, status 
 	FROM invitations i 
-	INNER JOIN users u on i.user_sendeur = u.id 
+	INNER JOIN users u on i.user_recipient = u.id 
 	WHERE i.status = ? 
-	AND i.user_sendeur = ? 
+	AND i.user_recipient = ? 
 	ORDER BY i.created_at
 	`, statusPending, u).Scan(&invitations)
 	if result.Error != nil {

@@ -16,6 +16,16 @@ body {
   overflow-x: hidden;
 }
 
+a{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+}
+
 .container {
   max-width: 990px;
   margin: auto;

@@ -11,12 +11,6 @@
     background-color: r.$primary;
     color: r.$text-color;
 
-    a{
-        text-decoration: none;
-        color: inherit;
-        cursor: pointer;
-    }
-
     .links {
         @extend %flex-center;
         gap: 0.5rem;

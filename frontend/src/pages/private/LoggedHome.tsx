@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { UserContext } from "../../contexts/UserContext"
 import { useContext, useEffect } from "react"
 import ContactList from "../../components/organisms/contacts/ContactList"
@@ -20,6 +20,7 @@ export default function LoggedHome() {
       ) : (
         <>
           <UserCard firstname={currentUser.firstname} lastname={currentUser.lastname} status={"🟢"} />
+          <Link to="/app/invit">Invit</Link>
           <ContactList />
         </>
       )}
