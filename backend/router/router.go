@@ -14,6 +14,7 @@ func Routes() {
 	// Auth
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
+	router.POST("/logout", middleware.RequireAuth, controllers.Logout)
 	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
 
 	// User

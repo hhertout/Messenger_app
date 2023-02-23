@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Button from "../../atoms/Button"
 import { FormRaw } from "../../moleculs/FormRaw"
@@ -11,6 +11,7 @@ export default function LoginForm({ login }: Props) {
   const navigate = useNavigate()
   const emailInput = useRef<HTMLInputElement>(null!)
   const passwordInput = useRef<HTMLInputElement>(null!)
+  const [error, setError] = useState<string>("")
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -18,11 +19,11 @@ export default function LoginForm({ login }: Props) {
     const password = passwordInput.current.value
 
     const res = await login(email, password)
-    if(res.status != 200) {
-        console.log("Error")
+    if (res.status != 200) {
+      console.error("Error")
+      setError("incorrect login or password")
     } else {
-        const data = await res.json()
-        const user = data.user
+      navigate("/")
     }
   }
 
@@ -30,6 +31,9 @@ export default function LoginForm({ login }: Props) {
     <form onSubmit={handleSubmit}>
       <FormRaw name={"email"} title={"Email"} type={"email"} isRequired={true} inputRef={emailInput} />
       <FormRaw name={"password"} title={"Password"} type={"password"} isRequired={true} inputRef={passwordInput} />
+
+      <p className="error">{error}</p>
+
       <Button title={"Loggin"} />
     </form>
   )

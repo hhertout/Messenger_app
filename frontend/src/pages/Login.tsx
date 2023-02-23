@@ -1,8 +1,19 @@
-import React from "react"
 import LoginForm from "../components/organisms/form/LoginForm"
 import { login } from "../api/Auth"
+import { useContext, useEffect } from "react"
+import { UserContext } from "../contexts/UserContext"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
+  const navigate = useNavigate()
+  const { currentUser } = useContext(UserContext)
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      navigate("/")
+    }
+  }, [currentUser])
+
   return (
     <div>
       <div className="container-sm">

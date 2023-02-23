@@ -3,6 +3,7 @@ package controllers
 import (
 	"API_go/go_test/config"
 	"API_go/go_test/models"
+	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -13,10 +14,11 @@ import (
 )
 
 func Validate(c *gin.Context) {
+	fmt.Println("Method => GET, Function => Validate")
 	user, _ := c.Get("user")
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": user,
+		"user": user,
 	})
 }
 
@@ -66,7 +68,12 @@ func Login(c *gin.Context) {
 
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "/", "localhost", true, true)
-	c.JSON(http.StatusOK, gin.H{"user": user})
+	c.JSON(http.StatusOK, gin.H{})
+}
+
+func Logout(c *gin.Context) {
+	c.SetCookie("Authorization", "", -1, "/", "localhost", false, true)
+	c.JSON(http.StatusOK, gin.H{})
 }
 
 // Recuperer l'ID du user connecté

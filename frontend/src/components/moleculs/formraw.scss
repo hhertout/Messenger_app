@@ -10,6 +10,7 @@
         margin-block: 0.2rem;
         max-width: 400px;
         padding: 0.3rem;
+        border-radius: 8px;
     }
     input:invalid{
         outline: 1px solid r.$error

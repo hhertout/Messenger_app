@@ -9,7 +9,6 @@ type Props = {
 export default function SignupForm({ signup }: Props) {
   const [password, setPassword] = useState<string>("")
   const [confirmPassword, setConfirmPassword] = useState<string>("")
-  const [error, setError] = useState<string | null >(null)
   const emailInput = useRef<HTMLInputElement>(null!)
   const firstnameInput = useRef<HTMLInputElement>(null!)
   const lastnameInput = useRef<HTMLInputElement>(null!)
@@ -28,7 +27,6 @@ export default function SignupForm({ signup }: Props) {
   }
 
   const handleConfirmPwdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(null)
     setConfirmPassword(e.currentTarget.value)
   }
 
