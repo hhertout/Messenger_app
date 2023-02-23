@@ -4,10 +4,12 @@ import Signup from "./pages/Signup"
 import "./assets/styles/global.scss"
 import Login from "./pages/Login"
 import LoggedHome from "./pages/private/LoggedHome"
+import Tapbar from "./components/organisms/navbar/Tapbar"
 
 function App() {
   return (
     <div className="app">
+        <Tapbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />

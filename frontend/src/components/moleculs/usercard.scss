@@ -1,0 +1,17 @@
+.usercard {
+    width: 100%;
+    padding-inline: 0.5rem;
+    .name-wrapper {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 0.5rem;
+
+        .username {
+          font-size: 1.5rem;
+        }
+        .userstatus{
+          font-size: 0.7rem
+        }
+    }
+}

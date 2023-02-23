@@ -11,3 +11,12 @@ $background: #333;
 $text-color: #F1F1F1;
 
 $font-body: 'Poppins', sans-serif;
+
+
+/*##########----MIXINES----############*/
+
+%flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

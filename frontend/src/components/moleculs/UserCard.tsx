@@ -1,4 +1,5 @@
 import React from "react"
+import "./usercard.scss"
 
 type Props = {
   firstname: string
@@ -8,11 +9,13 @@ type Props = {
 
 export default function UserCard({ firstname, lastname, status }: Props) {
   return (
-    <section>
-      <h1>
-        {firstname} {lastname}
-      </h1>
-      <div>{status}</div>
+    <section className="usercard">
+      <div className="name-wrapper">
+        <h1 className="username">
+          {firstname} {lastname}
+        </h1>
+        <div className="userstatus">{status}</div>
+      </div>
     </section>
   )
 }

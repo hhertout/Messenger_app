@@ -1,0 +1,24 @@
+@use '../../../assets/styles/root' as r;
+
+#tapbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    width: 100vw;
+    padding: 1rem;
+
+    background-color: r.$primary;
+    color: r.$text-color;
+
+    a{
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+
+    .links {
+        @extend %flex-center;
+        gap: 0.5rem;
+    }
+}

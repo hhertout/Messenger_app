@@ -1,34 +1,39 @@
-@use 'root' as r;
+@use "root" as r;
 
-*, ::before, ::after{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body{
-    background-color: r.$background;
-    color: r.$text-color;
-    font-family: r.$font-body;
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-    max-width: 990px;
-    margin: auto;
-    padding: 2rem;
+body {
+  background-color: r.$background;
+  color: r.$text-color;
+  font-family: r.$font-body;
+  width: 100vw;
+  overflow-x: hidden;
 }
-.container-xl{
-    max-width: 1200px;
-    margin: auto;
-    padding: 2rem;
+
+.container {
+  max-width: 990px;
+  margin: auto;
+  padding: 2rem;
 }
-.container-sm{
-    max-width: 550px;
-    margin: auto;
-    padding: 2rem;
+.container-xl {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+}
+.container-sm {
+  max-width: 550px;
+  margin: auto;
+  padding: 2rem;
 }
 .error {
-    color: r.$error;
-    margin-top: -0.5rem;
-    font-size: 0.8rem;
+  color: r.$error;
+  margin-top: -0.5rem;
+  font-size: 0.8rem;
 }
+
