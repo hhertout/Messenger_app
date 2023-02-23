@@ -9,10 +9,10 @@ export default function LoggedHome() {
   const { currentUser } = useContext(UserContext)
 
   useEffect(() => {
-    if (currentUser !== null) {
+    if (currentUser === null) {
       navigate("/")
     }
-  }, [])
+  }, [currentUser])
   return (
     <main>
       {currentUser === null ? (

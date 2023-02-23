@@ -16,7 +16,7 @@ export default function Home() {
   
   return (
     <div>
-      <h1>Hello world</h1>
+      <h1>Hello {currentUser != null ? currentUser.firstname : "world"}</h1>
 
       <button onClick={handleClick}>Loggout</button>
     </div>

@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Button from "../../atoms/Button"
 import { FormRaw } from "../../moleculs/FormRaw"
+import { getUserConnected } from "../../../api/Auth"
+import { UserContext } from "../../../contexts/UserContext"
 
 type Props = {
   login: (email: string, password: string) => Promise<Response>
@@ -9,6 +11,7 @@ type Props = {
 
 export default function LoginForm({ login }: Props) {
   const navigate = useNavigate()
+  const { setCurrentUser } = useContext(UserContext)
   const emailInput = useRef<HTMLInputElement>(null!)
   const passwordInput = useRef<HTMLInputElement>(null!)
   const [error, setError] = useState<string>("")
@@ -23,6 +26,16 @@ export default function LoginForm({ login }: Props) {
       console.error("Error")
       setError("incorrect login or password")
     } else {
+      getUserConnected().then(res => {
+        if (res.status === 200) {
+          setCurrentUser({
+            ID: res.user.ID,
+            email: res.user.Email,
+            firstname: res.user.Firstname,
+            lastname: res.user.Lastname,
+          })
+        }
+      })
       navigate("/")
     }
   }

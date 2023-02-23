@@ -27,7 +27,7 @@ export default function ContactList() {
     <>
       <div>Nombre de contacts : {contactNb}</div>
       {contacts.length === 0
-        ? "rien"
+        ? "No contact found... "
         : contacts.map((contact: Contact) => {
             return (
                 <ContactCards key={uuid()} firstname={contact.Firstname} lastname={contact.Lastname} />
