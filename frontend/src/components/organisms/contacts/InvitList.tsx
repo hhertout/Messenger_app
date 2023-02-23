@@ -29,7 +29,7 @@ export default function InvitList() {
       })
   }, [])
   return <>
-    {invitations.map(invitation => {
+    {invitations.length === 0 ? <p>You have {invitationNb} invitation</p> : invitations.map(invitation => {
         return (
             <InvitCard key={uuid()} firstname={invitation.Firstname} lastname={invitation.Lastname} id={invitation.ID} />
         )

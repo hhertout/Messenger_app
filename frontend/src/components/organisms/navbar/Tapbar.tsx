@@ -25,7 +25,7 @@ export default function Tapbar() {
           <>
             <Link to={"/app"}>My space</Link>
             <button onClick={handleClick} className="logout-button">
-              Loggout
+              Logout
             </button>
           </>
         ) : (
