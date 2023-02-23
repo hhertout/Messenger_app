@@ -3,7 +3,6 @@ package controllers
 import (
 	"API_go/go_test/config"
 	"API_go/go_test/models"
-	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -14,7 +13,6 @@ import (
 )
 
 func Validate(c *gin.Context) {
-	fmt.Println("Method => GET, Function => Validate")
 	user, _ := c.Get("user")
 
 	c.JSON(http.StatusOK, gin.H{

@@ -12,7 +12,7 @@ export default function Login() {
     if (currentUser !== null) {
       navigate("/")
     }
-  }, [currentUser])
+  }, [])
 
   return (
     <div>

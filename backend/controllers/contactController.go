@@ -20,7 +20,7 @@ func GetContacts(c *gin.Context) {
 	var allContacts []Contact
 
 	result := config.DB.Raw(`
-	SELECT firstname, lastname FROM contacts c 
+	SELECT c.ID, firstname, lastname FROM contacts c 
 	JOIN users u ON c.user_contact_id = u.id 
 	WHERE c.user_owner_id = ?
 	`, u).Scan(&allContacts)

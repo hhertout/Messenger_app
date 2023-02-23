@@ -12,28 +12,28 @@ func Routes() {
 	router := gin.New()
 	config.CORSConfig(router)
 	// Auth
-	router.POST("/signup", controllers.Signup)
-	router.POST("/login", controllers.Login)
-	router.POST("/logout", middleware.RequireAuth, controllers.Logout)
-	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
+	router.POST("api/signup", controllers.Signup)
+	router.POST("api/login", controllers.Login)
+	router.POST("api/logout", middleware.RequireAuth, controllers.Logout)
+	router.GET("api/validate", middleware.RequireAuth, controllers.Validate)
 
 	// User
-	router.GET("/user/:id", middleware.RequireAuth, controllers.GetUser)
+	router.GET("api/user/:id", middleware.RequireAuth, controllers.GetUser)
 
 	// Contacts
-	router.GET("/contacts", middleware.RequireAuth, controllers.GetContacts)
+	router.GET("api/contacts", middleware.RequireAuth, controllers.GetContacts)
 
 	// Invitations
-	router.GET("/invite/pending", middleware.RequireAuth, controllers.GetInvitation)
-	router.GET("/invite/accepted", middleware.RequireAuth, controllers.GetInvitation)
-	router.POST("/invite", middleware.RequireAuth, controllers.Invite)
-	router.DELETE("/invite/:id", middleware.RequireAuth, controllers.DeleteInvitation)
-	router.PUT("/invite/:id", middleware.RequireAuth, controllers.UpdateInvitation)
+	router.GET("api/invite/pending", middleware.RequireAuth, controllers.GetInvitation)
+	router.GET("api/invite/accepted", middleware.RequireAuth, controllers.GetInvitation)
+	router.POST("api/invite", middleware.RequireAuth, controllers.Invite)
+	router.DELETE("api/invite/:id", middleware.RequireAuth, controllers.DeleteInvitation)
+	router.PUT("api/invite/:id", middleware.RequireAuth, controllers.UpdateInvitation)
 
 	// Message
-	router.POST("/message", middleware.RequireAuth, controllers.SendMessage)
-	router.GET("/message/:id", middleware.RequireAuth, controllers.GetMessages)
-	router.DELETE("/message/:id", middleware.RequireAuth, controllers.DeleteMessage)
+	router.POST("api/message", middleware.RequireAuth, controllers.SendMessage)
+	router.GET("api/message/:id", middleware.RequireAuth, controllers.GetMessages)
+	router.DELETE("api/message/:id", middleware.RequireAuth, controllers.DeleteMessage)
 
 	router.Run()
 }
