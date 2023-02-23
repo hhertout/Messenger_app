@@ -1,4 +1,3 @@
-import React from 'react'
 import "./contactCard.scss"
 
 type Props = {
