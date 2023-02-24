@@ -8,6 +8,7 @@
 Project made to practice GO API & React
 
 ## Stack
+<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--oIqU795h--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://miro.medium.com/max/1400/1%2AGh4eaAQU432ZQH7qsVbJ_A.png" width="240" />
 <img src="https://miro.medium.com/max/1400/1*Ifpd_HtDiK9u6h68SZgNuA.png" width="240"/>
 
 <ul>
