@@ -12,7 +12,7 @@ Project made to practice GO API & React
 <img src="https://miro.medium.com/max/1400/1*Ifpd_HtDiK9u6h68SZgNuA.png" width="240"/>
 
 <ul>
-  <li><b>GO</b> <em>API w/ gin</em></li>
+  <li><b>GO</b> <em>API with gin framework</em></li>
   <li> <b>React</b> </li>
 </ul>
 
