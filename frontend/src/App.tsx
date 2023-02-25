@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import LoggedHome from "./pages/private/LoggedHome"
 import Tapbar from "./components/organisms/navbar/Tapbar"
 import Invit from "./pages/private/Invit"
+import Chat from "./pages/private/Chat"
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
 
         <Route path="/app" element={<LoggedHome />} />
         <Route path="/app/invit" element={<Invit />} />
-        
+        <Route path="/app/chat/:id" element={<Chat />} />
       </Routes>
     </div>
   )

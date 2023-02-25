@@ -1,21 +1,20 @@
 import ContactCards from "../../moleculs/ContactCards"
-import {v4 as uuid} from "uuid"
+import { v4 as uuid } from "uuid"
 import "./contactlist.scss"
 import { useContext } from "react"
 import { UserContext } from "../../../contexts/UserContext"
 
-
 export default function ContactList() {
-    const { contacts, contactNb } = useContext(UserContext)
+  const { contacts, contactNb } = useContext(UserContext)
 
   return (
     <div className="contact-wrapper">
       <div>Nombre de contacts : {contactNb}</div>
       {contacts.length === 0
         ? "No contact found... "
-        : contacts.map((contact) => {
+        : contacts.map(contact => {
             return (
-                <ContactCards key={uuid()} firstname={contact.Firstname} lastname={contact.Lastname} />
+                <ContactCards key={uuid()} id={contact.ID} firstname={contact.Firstname} lastname={contact.Lastname} />
             )
           })}
     </div>

@@ -19,7 +19,6 @@ export default function InvitList() {
     getInvits()
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         if(data.invitations === null) {
             console.log("No invit")
         } else {

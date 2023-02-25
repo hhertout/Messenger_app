@@ -10,7 +10,7 @@ func init() {
 	config.LoadEnv()
 	config.ConnectToDatabase()
 	migration.Migrate()
-	// datafixtures.Load()
+	//datafixtures.Load()
 }
 
 func main() {

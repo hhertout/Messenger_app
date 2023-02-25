@@ -1,14 +1,29 @@
+import { useEffect, useState } from "react"
 import "./contactCard.scss"
+import { getLastMessage } from "../../api/Contact"
+import { Link } from "react-router-dom"
 
 type Props = {
-    firstname: string
-    lastname: string
+  id: number
+  firstname: string
+  lastname: string
 }
 
-export default function ContactCards({firstname, lastname}: Props) {
+export default function ContactCards({ id, firstname, lastname }: Props) {
+  const [lastMessage, setLastMessage] = useState<string>("")
+  useEffect(() => {
+    getLastMessage(id)
+      .then(res => res.json())
+      .then(data => setLastMessage(data.message.Message))
+  }, [])
   return (
-    <div className='contact-card'>
-      <div>{firstname} {lastname}</div>
+    <Link to={`/app/chat/${id}`}>
+    <div className="contact-card">
+      <div>
+        {firstname} {lastname}
+      </div>
+      <div className="last-message">{lastMessage === "" ? "No message found" : lastMessage}</div>
     </div>
+    </Link>
   )
 }

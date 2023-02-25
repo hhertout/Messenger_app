@@ -1,0 +1,54 @@
+@use "../../assets/styles/root.scss" as r;
+
+.chat-firstname {
+  font-size: 0.5rem;
+  margin-bottom: -2px;
+  margin-inline-start: 0.5rem;
+  opacity: 0.8;
+}
+
+%inside-buble {
+  font-size: 0.8rem;
+  padding-inline: 1rem;
+  padding-block: 0.6rem;
+  border-radius: 6px;
+}
+
+%wrapper-common {
+  padding-block: r.$padding-border;
+  padding-inline: 0.8rem;
+}
+
+.message-wrapper-receiver {
+  @extend %wrapper-common;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.message-wrapper-sender {
+  @extend %wrapper-common;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.message-received-bubble {
+  background-color: r.$secondary;
+  @extend %inside-buble;
+}
+
+.message-sent-bubble {
+  background-color: r.$primary;
+  text-align: end;
+  @extend %inside-buble;
+}
+.chat-no-message{
+    display: flex;
+    justify-content: center;
+}

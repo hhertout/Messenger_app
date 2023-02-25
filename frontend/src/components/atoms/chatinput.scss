@@ -1,0 +1,10 @@
+@use "../../assets/styles/root.scss" as r;
+.chat-form{
+    padding-inline: r.$padding-border;
+
+    .chat-input{
+        width: 100%;
+        padding: r.$padding-border;
+        margin-block-start: r.$padding-border;
+    }
+}

@@ -1,5 +1,5 @@
-export const getContacts = async () => {
-  const route: string = `${import.meta.env.VITE_API_URL}/contacts`
+export const getMessages = async (id: string) => {
+  const route: string = `${import.meta.env.VITE_API_URL}/message/${id}`
 
   const params: RequestInit = {
     method: "GET",
@@ -13,15 +13,21 @@ export const getContacts = async () => {
   return res
 }
 
-export const getLastMessage = async (id: number) => {
-  const route: string = `${import.meta.env.VITE_API_URL}/lastMessage/${id}`
+export const sendMessage = async (id: string, message: string) => {
+  const route: string = `${import.meta.env.VITE_API_URL}/message`
+
+  const body = {
+    recipient: parseInt(id),
+    message: message,
+  }
 
   const params: RequestInit = {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-type": "application/json",
     },
     credentials: "include",
+    body: JSON.stringify(body),
   }
 
   const res = await fetch(route, params)

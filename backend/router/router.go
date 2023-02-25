@@ -22,6 +22,7 @@ func Routes() {
 
 	// Contacts
 	router.GET("api/contacts", middleware.RequireAuth, controllers.GetContacts)
+	router.GET("api/contact/:id", middleware.RequireAuth, controllers.GetContacts)
 
 	// Invitations
 	router.GET("api/invite/pending", middleware.RequireAuth, controllers.GetInvitation)

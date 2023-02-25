@@ -39,6 +39,29 @@ func GetContacts(c *gin.Context) {
 	})
 }
 
+func GetContactById(c *gin.Context) {
+	id := c.Param("id")
+	type Contact struct {
+		Firstname string
+		Lastname  string
+	}
+
+	var contact Contact
+
+	result := config.DB.First(&contact, id)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "contact not found",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"contact": contact,
+	})
+
+}
+
 func addContact(UserSender, UserReceiver uint) (models.Contact, error) {
 	//Recuperer les deux userid => en args
 	//Créer le contact

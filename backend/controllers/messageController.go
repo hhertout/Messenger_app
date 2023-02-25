@@ -4,6 +4,7 @@ import (
 	"API_go/go_test/config"
 	"API_go/go_test/models"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -35,6 +36,7 @@ func SendMessage(c *gin.Context) {
 		})
 		return
 	}
+	// Get the recipient id
 
 	if mBody.Recipient == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -42,11 +44,13 @@ func SendMessage(c *gin.Context) {
 			"message": "recipient not found",
 		})
 	}
+	var r models.Contact
+	config.DB.First(&r, mBody.Recipient)
 
 	//Save the message
 	m := models.Message{
 		UserSender:    u,
-		UserRecipient: mBody.Recipient,
+		UserRecipient: r.UserContactID,
 		Message:       mBody.Message,
 	}
 	result := config.DB.Save(&m)
@@ -75,10 +79,12 @@ func GetMessages(c *gin.Context) {
 	}
 
 	// Get the recipient id
-	var r models.User
-	id := c.Param("id")
+	idParam := c.Param("id")
+	var r models.Contact
 
-	result := config.DB.Select("ID").First(&r, id)
+	id, _ := strconv.Atoi(idParam)
+
+	result := config.DB.First(&r, id)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "bad request",
@@ -104,7 +110,7 @@ func GetMessages(c *gin.Context) {
 	WHERE (s.id = ? AND r.id= ? ) OR (s.id = ? AND r.id = ?)
 	ORDER BY m.created_at
 	LIMIT 100;
-	`, u, u, u, r.ID, r.ID, u).Scan(&m)
+	`, u, u, u, r.UserContactID, r.UserContactID, u).Scan(&m)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "bad request",
@@ -138,7 +144,18 @@ func DeleteMessage(c *gin.Context) {
 }
 
 func GetLastMessage(c *gin.Context) {
-	id := c.Param("id")
+	idParam := c.Param("id")
+	var r models.Contact
+
+	id, _ := strconv.Atoi(idParam)
+
+	result := config.DB.First(&r, id)
+	if result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "bad request",
+		})
+		return
+	}
 
 	type LastMessage struct {
 		Message string
@@ -146,14 +163,14 @@ func GetLastMessage(c *gin.Context) {
 
 	var lastMessage LastMessage
 
-	result := config.DB.Raw(`
+	result = config.DB.Raw(`
 	SELECT message FROM contacts c 
 	JOIN users u ON c.user_contact_id = u.id 
 	JOIN messages m ON m.user_recipient = u.id OR m.user_sender = u.id 
 	WHERE c.user_contact_id = ? 
 	ORDER BY m.created_at DESC 
 	LIMIT 1
-	`, id).Scan(&lastMessage)
+	`, r.UserContactID).Scan(&lastMessage)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{})
 	}

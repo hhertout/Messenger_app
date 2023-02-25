@@ -7,7 +7,7 @@ import (
 	"math/rand"
 )
 
-var contactNb = 50
+var contactNb = 20
 
 func ContactFixtures() {
 

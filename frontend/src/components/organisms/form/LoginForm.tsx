@@ -35,8 +35,8 @@ export default function LoginForm({ login }: Props) {
             lastname: res.user.Lastname,
           })
         }
-      })
-      navigate("/app")
+      }).then(() => navigate("/app"))
+      
     }
   }
 
