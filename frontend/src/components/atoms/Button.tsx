@@ -6,8 +6,8 @@ type Props = {
     color?: string
 }
 
-export default function Button({title, size="medium", color="primary"}: Props) {
-  return (
-    <button className={`btn btn-${size} btn-${color}`}>{title}</button>
-  )
+export default function Button({title, size = "medium", color = "primary"}: Props) {
+    return (
+        <button className={`btn btn-${size} btn-${color}`}>{title}</button>
+    )
 }
