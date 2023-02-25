@@ -2,7 +2,7 @@
     "scripts": {
         "setup": "cd frontend && npm install",
         "api-build": "cd backend && go build -o api",
-        "dev-back": "cd backend && go build -o api && go run .",
+        "dev-back": "cd backend && go build -o api && ./api",
         "dev-front": "cd frontend && npm run dev",
         "tailwind": "cd frontend && npx tailwindcss -i ./src/assets/style/main.css -o ./dist/main.css --watch"
     }

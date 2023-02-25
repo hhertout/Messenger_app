@@ -136,3 +136,29 @@ func DeleteMessage(c *gin.Context) {
 		"message": "message deleted",
 	})
 }
+
+func GetLastMessage(c *gin.Context) {
+	id := c.Param("id")
+
+	type LastMessage struct {
+		Message string
+	}
+
+	var lastMessage LastMessage
+
+	result := config.DB.Raw(`
+	SELECT message FROM contacts c 
+	JOIN users u ON c.user_contact_id = u.id 
+	JOIN messages m ON m.user_recipient = u.id OR m.user_sender = u.id 
+	WHERE c.user_contact_id = ? 
+	ORDER BY m.created_at DESC 
+	LIMIT 1
+	`, id).Scan(&lastMessage)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{})
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": lastMessage,
+	})
+}

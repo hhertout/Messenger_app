@@ -34,6 +34,7 @@ func Routes() {
 	router.POST("api/message", middleware.RequireAuth, controllers.SendMessage)
 	router.GET("api/message/:id", middleware.RequireAuth, controllers.GetMessages)
 	router.DELETE("api/message/:id", middleware.RequireAuth, controllers.DeleteMessage)
+	router.GET("api/lastMessage/:id", middleware.RequireAuth, controllers.GetLastMessage)
 
 	router.Run()
 }
