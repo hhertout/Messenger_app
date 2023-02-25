@@ -2,7 +2,6 @@ import React, { FormEvent, useContext, useRef } from "react"
 import { useParams } from "react-router-dom"
 import { sendMessage } from "../../api/Chat"
 import { MessageContext } from "../../contexts/MessageContext"
-import type { Message } from "../../contexts/MessageContext"
 import "./chatinput.scss"
 
 export default function ChatInput() {
@@ -17,7 +16,12 @@ export default function ChatInput() {
 
     sendMessage(id!, target.value)
       .then(res => res.json())
-      .then(() => {
+      .then(data => {
+        let newMessage = data.message
+        newMessage = { ...newMessage, Sender: true }
+        const message = [...messages, newMessage]
+        setMessages(message)
+
         target.value = ""
       })
   }
