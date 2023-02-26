@@ -1,0 +1,13 @@
+@use "../../../assets/styles/root.scss" as r;
+
+.chat-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  background-color: r.$primary;
+}

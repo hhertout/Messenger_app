@@ -7,9 +7,11 @@ import { MessageContextProvider } from "../../contexts/MessageContext"
 export default function Chat() {
   return (
     <MessageContextProvider>
+        <div className="container">
       <ChatHeader />
       <ChatSection />
       <ChatInput />
+      </div>
     </MessageContextProvider>
   )
 }

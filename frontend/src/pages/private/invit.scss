@@ -1,0 +1,10 @@
+@use "../../assets/styles/root.scss" as r;
+
+.invitation-list-section {
+    padding-block: 0.5rem;
+    padding-inline: r.$padding-border;
+
+    .wrapper{
+        padding-block: 1rem;
+    }
+}

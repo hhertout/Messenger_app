@@ -15,19 +15,22 @@ export default function InvitSender() {
       .then(data => {
         console.log(data)
         setFeedBackMessage(data.message)
-        if(data.message === "invitation sent") {
-            target.value = ""
+        if (data.message === "invitation sent") {
+          target.value = ""
         }
       })
   }
 
   return (
-    <div>
-      <p>{feedBackMessage}</p>
+    <section>
+
+      <p className="feedback-message">{feedBackMessage}</p>
+      <div className="invitation-send-section">
       <form onSubmit={handleSubmit}>
-        <input type={"email"} ref={inputRef} />
+        <input type={"email"} ref={inputRef} placeholder={"john.doe@gmail.com"}/>
         <button type="submit">Send</button>
       </form>
-    </div>
+      </div>
+    </section>
   )
 }
