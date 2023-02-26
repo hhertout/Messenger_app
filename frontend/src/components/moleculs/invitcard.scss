@@ -1,0 +1,29 @@
+@use '../../assets/styles/root.scss' as r;
+
+%common{
+    background: none;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    color: r.$text-color;
+    border-radius: 6px;
+    border: none;
+    margin-block: 0.5rem;
+    margin-inline: 0.3rem;
+}
+
+.invitcard-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-inline: r.$padding-border;
+
+    .accept{
+        @extend %common;
+        outline: 2px ridge r.$primary;
+    }
+    .reject{
+        @extend %common;
+        outline: 2px ridge r.$error;
+    }
+}

@@ -27,7 +27,7 @@ export default function ChatInput() {
   }
   return (
     <form className="chat-form" onSubmit={handleSubmit}>
-      <input className="chat-input" ref={chatInputRef} />
+      <input className="chat-input" ref={chatInputRef} placeholder={"Send your message"}/>
     </form>
   )
 }

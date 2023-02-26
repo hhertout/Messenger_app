@@ -19,12 +19,10 @@ export default function InvitList() {
     getInvits()
       .then(res => res.json())
       .then(data => {
-        if(data.invitations === null) {
-            console.log("No invit")
-        } else {
+        if(data.invitations !== null) {
             setInvitationNb(data.invitationsNumber)
             setInvitations(data.invitations)
-        }
+        } 
       })
   }, [])
   return <>

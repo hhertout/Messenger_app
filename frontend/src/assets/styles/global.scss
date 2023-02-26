@@ -14,7 +14,7 @@ body {
   font-family: r.$font-body;
   width: 100vw;
   overflow-x: hidden;
-  margin-bottom: 8vh;
+  margin-bottom: 10vh;
 }
 
 a{
@@ -30,17 +30,14 @@ ul {
 .container {
   max-width: 990px;
   margin: auto;
-  padding: 2rem;
 }
 .container-xl {
   max-width: 1200px;
   margin: auto;
-  padding: 2rem;
 }
 .container-sm {
   max-width: 550px;
   margin: auto;
-  padding: 2rem;
 }
 .error {
   color: r.$error;
@@ -48,3 +45,15 @@ ul {
   font-size: 0.8rem;
 }
 
+.icon-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 80px;
+}
+
+.icon-text{
+    font-size: 0.8rem;
+}

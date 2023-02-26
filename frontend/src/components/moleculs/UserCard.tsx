@@ -8,13 +8,13 @@ type Props = {
 
 export default function UserCard({ firstname, lastname, status }: Props) {
   return (
-    <section className="usercard">
+    <div className="usercard">
       <div className="name-wrapper">
         <h1 className="username">
           {firstname} {lastname}
         </h1>
         <div className="userstatus">{status}</div>
       </div>
-    </section>
+    </div>
   )
 }

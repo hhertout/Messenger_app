@@ -43,3 +43,21 @@ export const rejectInvit = async(id: number) => {
     const res = await fetch(route, params)
     return res
 }
+
+export const sendInvit = async(email: string) => {
+    const route: string = `${import.meta.env.VITE_API_URL}/invite`
+    const body = {
+        email: email
+    }
+    const params: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(body)
+    }
+  
+    const res = await fetch(route, params)
+    return res
+}

@@ -22,7 +22,7 @@ export default function ContactCards({ id, firstname, lastname }: Props) {
       <div>
         {firstname} {lastname}
       </div>
-      <div className="last-message">{lastMessage === "" ? "No message found" : lastMessage}</div>
+      <div className="last-message">{lastMessage === "" ? "No message found" : lastMessage.substring(0, 65) + "..."}</div>
     </div>
     </Link>
   )

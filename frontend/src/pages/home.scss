@@ -1,0 +1,20 @@
+@use "../assets/styles/root.scss" as r;
+
+.hero-section-wrapper {
+  background-color: white;
+  color: r.$text-color-dark;
+  padding-block: 2rem;
+
+  .hero-section-container {
+    padding-inline: r.$padding-border;
+  }
+  .name {
+      color: r.$primary;
+    }
+}
+
+.home-section-title {
+  padding-block: 3rem;
+  padding-inline: r.$padding-border;
+  background-color: r.$primary;
+}

@@ -9,7 +9,7 @@ export default function ContactList() {
 
   return (
     <div className="contact-wrapper">
-      <div>Nombre de contacts : {contactNb}</div>
+      <div>Contact number : {contactNb}</div>
       {contacts.length === 0
         ? "No contact found... "
         : contacts.map(contact => {

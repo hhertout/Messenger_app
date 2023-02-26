@@ -1,0 +1,13 @@
+@use "../../assets/styles/root.scss" as r;
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    background-color: r.$primary;
+    margin-inline: r.$padding-border;
+    margin-block: 0.5rem;
+    border-radius: 16px;
+}

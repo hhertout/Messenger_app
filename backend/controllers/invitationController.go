@@ -22,20 +22,28 @@ func Invite(c *gin.Context) {
 
 	// Recuperer le user a qui l'invitation est envoyée
 	type Body struct {
-		ID uint
+		Email string
 	}
 	var iBody Body
 	if c.Bind(&iBody) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":  "bad request",
-			"message": "invitation failed",
+			"message": "bad request",
+		})
+		return
+	}
+	var r models.User
+	result := config.DB.Where(models.User{Email: iBody.Email}).First(&r)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "user not found",
 		})
 		return
 	}
 
 	// Enregistré l'invitation avec le status pending
 	invitation := models.Invitation{
-		UserRecipient: iBody.ID,
+		UserRecipient: r.ID,
 		UserSendeur:   u,
 		Status:        statusPending,
 	}
