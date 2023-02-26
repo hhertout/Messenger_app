@@ -103,7 +103,7 @@ func GetMessages(c *gin.Context) {
 	var m []Message
 
 	result = config.DB.Raw(`
-	SELECT IF(s.id = ?, s.firstname, r.firstname) as Firstname, IF(s.id= ?, true, false) as Sender, m.id, message, m.created_at 
+	SELECT IF(s.id = ?, r.firstname, s.firstname) as Firstname, IF(s.id= ?, true, false) as Sender, m.id, message, m.created_at 
 	FROM messages m 
 	INNER JOIN users s ON m.user_sender = s.id
 	INNER JOIN users r ON m.user_recipient = r.id

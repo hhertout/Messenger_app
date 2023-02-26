@@ -8,6 +8,7 @@ type Props = {
 export default function MessageSend({ message }: Props) {
   return (
     <div className="message-wrapper-sender">
+        <div className="chat-firstname">You</div>
       <div className="message-sent-bubble">{message}</div>
     </div>
   )
