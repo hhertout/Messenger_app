@@ -8,7 +8,6 @@ export default function ChatHeader() {
   const { id } = useParams()
   const { contacts } = useContext(UserContext)
   const contact = FindContact(parseInt(id!), contacts)
-  console.log(contact)
   return (
     <section className="chat-header">
       {contact.Firstname} {contact.Lastname}
