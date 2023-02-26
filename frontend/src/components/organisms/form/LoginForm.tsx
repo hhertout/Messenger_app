@@ -37,7 +37,8 @@ export default function LoginForm({ login }: Props) {
               })
             }
           })
-          .then(() => navigate("/app"))
+          // NOT OPTIMAL - MUST CHANGE
+          .then(() => window.location.href = "/")
       }
     })
   }

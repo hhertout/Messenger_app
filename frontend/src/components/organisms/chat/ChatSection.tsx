@@ -7,11 +7,11 @@ import { v4 as uuid } from "uuid"
 import NoMessage from "../../moleculs/NoMessage"
 import "./chatsection.scss"
 import { MessageContext } from "../../../contexts/MessageContext"
-
+import { scrollToBot } from "../../../helper/ScrollToBot"
 
 export default function ChatSection() {
   let { id } = useParams<string>()
-  const {messages, setMessages} = useContext(MessageContext)
+  const { messages, setMessages } = useContext(MessageContext)
 
   useEffect(() => {
     if (id) {
@@ -26,8 +26,12 @@ export default function ChatSection() {
     }
   }, [])
 
+  useEffect(() => {
+    scrollToBot("chat-section")
+  }, [messages])
+
   return (
-    <section className="chat-section">
+    <section id="chat-section" className="chat-section">
       {messages.length > 0 ? (
         messages.map(message => {
           return (
