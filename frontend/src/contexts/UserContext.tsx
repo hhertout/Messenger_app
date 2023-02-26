@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, SetStateAction, useEffect, useState } from "react"
+import { createContext, PropsWithChildren, SetStateAction, useEffect, useMemo, useState } from "react"
 import { getUserConnected } from "../api/Auth"
 import { getContacts } from "../api/Contact"
 
@@ -38,7 +38,7 @@ export const UserContextProvider = ({ children }: PropsWithChildren) => {
   const [contacts, setContacts] = useState<Contact[]>([])
   const [contactNb, setContactNb] = useState<number>(0)
 
-  useEffect(() => {
+  useMemo(() => {
     getUserConnected().then(res => {
       if (res.status === 200) {
         setCurrentUser({

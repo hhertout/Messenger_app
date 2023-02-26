@@ -11,7 +11,7 @@ export default function Signup() {
     if (currentUser !== null) {
       navigate("/")
     }
-  }, [currentUser])
+  }, [])
   return (
     <div>
       <div className="container-sm">

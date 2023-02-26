@@ -16,28 +16,30 @@ export default function LoginForm({ login }: Props) {
   const passwordInput = useRef<HTMLInputElement>(null!)
   const [error, setError] = useState<string>("")
 
-  const handleSubmit = async (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     const email = emailInput.current.value
     const password = passwordInput.current.value
 
-    const res = await login(email, password)
-    if (res.status != 200) {
-      console.error("Error")
-      setError("incorrect login or password")
-    } else {
-      getUserConnected().then(res => {
-        if (res.status === 200) {
-          setCurrentUser({
-            ID: res.user.ID,
-            email: res.user.Email,
-            firstname: res.user.Firstname,
-            lastname: res.user.Lastname,
+    login(email, password).then(res => {
+      if (res.status != 200) {
+        console.error("Error")
+        setError("incorrect login or password")
+      } else {
+        getUserConnected()
+          .then(res => {
+            if (res.status === 200) {
+              setCurrentUser({
+                ID: res.user.ID,
+                email: res.user.Email,
+                firstname: res.user.Firstname,
+                lastname: res.user.Lastname,
+              })
+            }
           })
-        }
-      }).then(() => navigate("/app"))
-      
-    }
+          .then(() => navigate("/app"))
+      }
+    })
   }
 
   return (
