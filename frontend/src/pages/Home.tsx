@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import { UserContext } from "../contexts/UserContext"
 import "./home.scss"
 
@@ -18,6 +19,9 @@ export default function Home() {
             Hello <span className="name">{currentUser != null ? currentUser.firstname : ""}</span> !
           </h2>
         </div>
+      </section>
+      <section>
+        <Link to={"/signup"}>Signup</Link>
       </section>
     </div>
   )

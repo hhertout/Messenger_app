@@ -25,6 +25,7 @@ export default function InvitList() {
         } 
       })
   }, [])
+  useEffect(() => {}, [invitations])
   return <>
     {invitations.length === 0 ? <p>You have {invitationNb} invitation</p> : invitations.map(invitation => {
         return (

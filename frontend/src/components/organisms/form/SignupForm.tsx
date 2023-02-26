@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Button from "../../atoms/Button"
 import { FormRaw } from "../../moleculs/FormRaw"
 
@@ -12,6 +13,7 @@ export default function SignupForm({ signup }: Props) {
   const emailInput = useRef<HTMLInputElement>(null!)
   const firstnameInput = useRef<HTMLInputElement>(null!)
   const lastnameInput = useRef<HTMLInputElement>(null!)
+  const navigate = useNavigate()
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -19,7 +21,11 @@ export default function SignupForm({ signup }: Props) {
     const firstname = firstnameInput.current.value
     const lastname = lastnameInput.current.value
 
-    signup(email, password, firstname, lastname)
+    signup(email, password, firstname, lastname).then(res => {
+        if(res.status === 201) {
+            navigate("/login")
+        }
+    })
   }
 
   const handlePwdChange = (e: React.ChangeEvent<HTMLInputElement>) => {

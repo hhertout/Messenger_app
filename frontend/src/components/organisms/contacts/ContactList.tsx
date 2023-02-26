@@ -10,8 +10,7 @@ export default function ContactList() {
   return (
     <div className="contact-wrapper">
       <div>Contact number : {contactNb}</div>
-      {contacts.length === 0
-        ? "No contact found... "
+      { contacts.length > 0 ? "No contact found... "
         : contacts.map(contact => {
             return (
                 <ContactCards key={uuid()} id={contact.ID} firstname={contact.Firstname} lastname={contact.Lastname} />

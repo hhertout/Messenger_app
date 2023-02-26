@@ -13,7 +13,6 @@ export default function InvitSender() {
     sendInvit(target.value)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setFeedBackMessage(data.message)
         if (data.message === "invitation sent") {
           target.value = ""

@@ -51,7 +51,11 @@ export const UserContextProvider = ({ children }: PropsWithChildren) => {
         getContacts()
           .then(res => res.json())
           .then(data => {
-            setContacts(data.contacts)
+            let contacts = data.contacts
+            if(!data.contacts){
+                contacts = []
+            }
+            setContacts(contacts)
             setContactNb(data.contacts_nb)
           })
       }
